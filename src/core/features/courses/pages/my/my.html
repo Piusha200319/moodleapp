@@ -4,9 +4,7 @@
             <ion-back-button [text]="'core.back' | translate" />
         </ion-buttons>
         <ion-title>
-            <h1>
-                <core-site-logo logoType="top" />
-            </h1>
+            <h1 class="core-welcome-title">Welcome to Edu Tech</h1>
         </ion-title>
         <ion-buttons slot="end">
             <core-user-menu-button />
@@ -17,6 +15,9 @@
     <ion-refresher slot="fixed" [disabled]="!loaded" (ionRefresh)="refresh($event.target)">
         <ion-refresher-content pullingText="{{ 'core.pulltorefresh' | translate }}" />
     </ion-refresher>
+    <div class="edutec-home-banner list-item-limited-width">
+        <img src="assets/img/home_banner.jpg" alt="Edu Tech Banner" class="banner-img" />
+    </div>
     <core-loading [hideUntil]="loaded">
         <ion-item class="ion-text-wrap divider">
             <ion-label>

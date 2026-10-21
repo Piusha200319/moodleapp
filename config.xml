@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="53000" id="com.moodle.moodlemobile" ios-CFBundleVersion="5.3.0.0" version="5.3.0" versionCode="53000" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Moodle</name>
+    <name>Edu Tech</name>
     <description>Moodle official app</description>
     <author email="mobile@moodle.com" href="http://moodle.com">Moodle Mobile team</author>
     <content src="index.html" />
@@ -18,7 +18,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <hook src="scripts/cordova-hooks/before_plugin_add.sh" type="before_plugin_add" />
+    <hook src="scripts/cordova-hooks/before_plugin_add.js" type="before_plugin_add" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />

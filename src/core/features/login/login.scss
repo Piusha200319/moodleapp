@@ -1,11 +1,25 @@
 @use "src/theme/globals" as *;
 
 :host {
-    ion-content,
-    ion-list {
-        --background: var(--core-login-background);
-        --ion-item-background: var(--core-login-background);
+    ion-toolbar {
+        --background: transparent;
+        --border-color: transparent;
+    }
+
+    ion-content {
+        --background: url('/assets/img/edutec-background.jpg') no-repeat center center / cover;
         --color: var(--core-login-text-color);
+    }
+
+    ion-list {
+        --background: transparent;
+        --ion-item-background: transparent;
+        --color: var(--core-login-text-color);
+    }
+
+    ion-item {
+        --background: transparent;
+        --ion-item-background: transparent;
     }
 
     ion-item ion-label {

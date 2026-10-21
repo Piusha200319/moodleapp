@@ -103,6 +103,15 @@ export default class CoreLoginSitePage implements OnInit {
         // Load fixed sites if they're set.
         const sites = await CoreLoginHelper.getAvailableSites();
 
+        if (sites.length === 1) {
+            CoreNavigator.navigate('/login/credentials', {
+                reset: true,
+                params: { siteUrl: sites[0].url },
+            });
+
+            return;
+        }
+
         if (sites.length) {
             url = await this.initSiteSelector();
         } else {

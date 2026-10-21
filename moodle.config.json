@@ -1,6 +1,6 @@
 {
     "app_id": "com.moodle.moodlemobile",
-    "appname": "Moodle Mobile",
+    "appname": "Edu Tech",
     "versioncode": 53000,
     "versionname": "5.3.0",
     "cache_update_frequency_usually": 420000,
@@ -87,16 +87,21 @@
         "high": 120
     },
     "customurlscheme": "moodlemobile",
-    "sites": [],
+    "sites": [
+        {
+            "name": "Edu Tech",
+            "url": "https://moodleapp.sanetra.net"
+        }
+    ],
     "multisitesdisplay": "",
     "sitefindersettings": {},
-    "onlyallowlistedsites": false,
+    "onlyallowlistedsites": true,
     "forcedefaultlanguage": false,
     "privacypolicy": "https://moodle.net/moodle-app-privacy/",
-    "notificoncolor": "#f98012",
+    "notificoncolor": "#bed63a",
     "enableanalytics": false,
     "forceColorScheme": "",
-    "forceLoginLogo": false,
+    "forceLoginLogo": true,
     "showTopLogo": "hidden",
     "ioswebviewscheme": "moodleappfs",
     "appstores": {

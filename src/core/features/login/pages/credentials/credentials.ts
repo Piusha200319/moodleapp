@@ -19,8 +19,11 @@ import { debounceTime } from 'rxjs/operators';
 
 import { CoreSSO } from '@static/sso';
 import { CoreNetwork } from '@services/network';
+import { CoreApp } from '@services/app';
 import { CoreSiteCheckResponse, CoreSites } from '@services/sites';
 import { CoreLoginHelper } from '@features/login/services/login-helper';
+import { BackButtonPriority } from '@/core/constants';
+import { BackButtonEvent } from '@ionic/core';
 import { Translate } from '@singletons';
 import { CoreSitePublicConfigResponse, CoreUnauthenticatedSite } from '@classes/sites/unauthenticated-site';
 import { CoreEventObserver, CoreEvents } from '@static/events';
@@ -79,6 +82,7 @@ export default class CoreLoginCredentialsPage implements OnInit, OnDestroy {
     siteCheckError = '';
     displaySiteUrl = false;
     showLoginForm = true;
+    canGoBack = false;
 
     protected siteCheck?: CoreSiteCheckResponse;
     protected eventThrown = false;
@@ -88,6 +92,7 @@ export default class CoreLoginCredentialsPage implements OnInit, OnDestroy {
     protected valueChangeSubscription?: Subscription;
     protected alwaysShowLoginFormObserver?: CoreEventObserver;
     protected loginObserver?: CoreEventObserver;
+    protected backButtonFunction?: (event: BackButtonEvent) => void;
     protected fb = inject(FormBuilder);
 
     constructor() {
@@ -113,6 +118,16 @@ export default class CoreLoginCredentialsPage implements OnInit, OnDestroy {
             this.urlToOpen = CoreNavigator.getRouteParam('urlToOpen');
             this.supportConfig = this.siteConfig && new CoreUserGuestSupportConfig(this.site, this.siteConfig);
             this.displaySiteUrl = this.site.shouldDisplayInformativeLinks();
+            this.canGoBack = (await CoreLoginHelper.getAvailableSites()).length > 1;
+
+            if (!this.canGoBack) {
+                this.backButtonFunction = (event: BackButtonEvent) => {
+                    event.detail.register(BackButtonPriority.CORE_TABS, () => {
+                        CoreApp.closeApp();
+                    });
+                };
+                document.addEventListener('ionBackButton', this.backButtonFunction);
+            }
         } catch (error) {
             CoreAlerts.showError(error);
 
@@ -381,6 +396,10 @@ export default class CoreLoginCredentialsPage implements OnInit, OnDestroy {
             },
             this.siteId,
         );
+        if (this.backButtonFunction) {
+            document.removeEventListener('ionBackButton', this.backButtonFunction);
+            this.backButtonFunction = undefined;
+        }
         this.valueChangeSubscription?.unsubscribe();
         this.alwaysShowLoginFormObserver?.off();
         this.loginObserver?.off();

@@ -9,6 +9,9 @@
     <ion-refresher slot="fixed" [disabled]="!loaded" (ionRefresh)="refreshDashboard($event.target)">
         <ion-refresher-content pullingText="{{ 'core.pulltorefresh' | translate }}" />
     </ion-refresher>
+    <div class="edutec-home-banner list-item-limited-width">
+        <img src="assets/img/home_banner.jpg" alt="Edu Tech Banner" class="banner-img" />
+    </div>
 
     <core-loading [hideUntil]="loaded" placeholderType="column" placeholderHeight="96px">
         @if (hasMainBlocks) {

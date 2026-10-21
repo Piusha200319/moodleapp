@@ -13,6 +13,60 @@
 }
 
 /*
+ * Edu Tech Login Page Background
+ * -------------------------------------------
+ */
+page-core-login-credentials,
+page-core-login-site {
+    ion-toolbar {
+        --background: transparent !important;
+        --border-color: transparent !important;
+    }
+
+    ion-content {
+        --background: url('/assets/img/edutec-background.jpg') no-repeat center center / cover !important;
+    }
+
+    ion-list {
+        --background: transparent !important;
+        --ion-item-background: transparent !important;
+    }
+
+    ion-item {
+        --background: transparent !important;
+        --ion-item-background: transparent !important;
+    }
+}
+
+/*
+ * Edu Tech Welcome Title
+ * -------------------------------------------
+ */
+.core-welcome-title {
+    color: #7ea615 !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.3px;
+}
+
+/*
+ * Edu Tech Home Banner
+ * -------------------------------------------
+ */
+.edutec-home-banner {
+    padding: 16px 16px 0 16px;
+    max-width: var(--list-item-max-width, 800px);
+    margin: 0 auto;
+
+    .banner-img {
+        width: 100%;
+        display: block;
+        border-radius: var(--mdl-shape-borderRadius-lg, 12px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        object-fit: cover;
+    }
+}
+
+/*
  * Dark Theme
  * -------------------------------------------
  */
