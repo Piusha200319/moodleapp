@@ -22,6 +22,7 @@ workflows:
           npx cordova plugin add ./cordova-plugin-moodleapp --save || true
           npx cordova prepare ios
           find platforms/ios -type f \( -name "*.m" -o -name "*.h" \) -exec sed -i '' '/#import <netinet6\/in6.h>/d' {} + 2>/dev/null || true
+          find platforms/ios -name "EncryptionHandler.m" -exec sed -i '' 's/#import "Moodle-Swift.h"/#import "App-Swift.h"/' {} + 2>/dev/null || true
       - name: Install CocoaPods
         script: |
           cd platforms/ios
@@ -35,6 +36,7 @@ workflows:
         script: |
           cd platforms/ios
           find . -type f \( -name "*.m" -o -name "*.h" \) -exec sed -i '' '/#import <netinet6\/in6.h>/d' {} + 2>/dev/null || true
+          find . -name "EncryptionHandler.m" -exec sed -i '' 's/#import "Moodle-Swift.h"/#import "App-Swift.h"/' {} + 2>/dev/null || true
           
           if [ -d "App.xcworkspace" ]; then
             echo "Building App.xcworkspace..."
