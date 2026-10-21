@@ -21,30 +21,19 @@ workflows:
           npx cordova platform add ios --save || true
           npx cordova plugin add ./cordova-plugin-moodleapp --save || true
           npx cordova prepare ios
-          # Patch private header netinet6/in6.h for Xcode 16 compatibility
           find platforms/ios -type f \( -name "*.m" -o -name "*.h" \) -exec sed -i '' '/#import <netinet6\/in6.h>/d' {} + 2>/dev/null || true
       - name: Install CocoaPods
         script: |
           cd platforms/ios
           if [ -f "Podfile" ]; then
             if ! grep -q "post_install" Podfile; then
-              cat << 'EOF' >> Podfile
-
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
-    end
-  end
-end
-EOF
+              printf "\npost_install do |installer|\n  installer.pods_project.targets.each do |target|\n    target.build_configurations.each do |config|\n      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'\n    end\n  end\nend\n" >> Podfile
             fi
             pod install --repo-update || true
           fi
       - name: Build iOS Application
         script: |
           cd platforms/ios
-          # Ensure netinet6/in6.h is stripped from all source and pod files
           find . -type f \( -name "*.m" -o -name "*.h" \) -exec sed -i '' '/#import <netinet6\/in6.h>/d' {} + 2>/dev/null || true
           
           if [ -d "App.xcworkspace" ]; then
